@@ -1,0 +1,18 @@
+---
+- name: add user user4
+    user:
+      name: user4
+      comment: User 4
+
+-name: copy encrypted key id_rsa.pub to remote host
+ copy: 
+   src: id_rsa.pub
+   dest: /home/user4/id_rsa.pub
+   remote_src: yes
+
+-name: decrypt file id_rsa.pub on remote host 
+ copy:
+   src: /home/user4/id_rsa.pub
+   dest: /home/user4/.ssh/authorized_keys
+   decrypt: yes
+   remote_src: no 
